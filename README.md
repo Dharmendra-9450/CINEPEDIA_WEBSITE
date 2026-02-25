@@ -3,6 +3,7 @@
 CINEPEDIA is a modern and responsive movie information website that allows users to explore movies, view details, and discover trending content in an elegant and user-friendly interface.
 
 🚀 Live Demo: [http://YOUR_PUBLIC_IP ](http://13.218.163.43/) 
+
 📂 Repository: https://github.com/Dharmendra-9450/CINEPEDIA_WEBSITE
 
 ---
@@ -84,9 +85,17 @@ Through this project, I learned:
 
 ## 📸 Screenshots
 
-(Add screenshots here)
+<img width="1919" height="946" alt="image" src="https://github.com/user-attachments/assets/db4b1dc3-65e9-4a6d-8112-c39c441c053f" />
 
-Example:
+
+<img width="1613" height="733" alt="image" src="https://github.com/user-attachments/assets/54d4ed85-a7b5-4104-8c10-b577b1fd3086" />
+
+
+<img width="1919" height="979" alt="image" src="https://github.com/user-attachments/assets/7d6b2d68-7dd0-4706-9606-d477332f36b3" />
+
+
+
+
 
 ---
 
@@ -102,10 +111,9 @@ Example:
 
 ## 👨‍💻 Author
 
-**Dharmendra Vatsa**
+**Dharmendra Patel**
 
 - GitHub: https://github.com/Dharmendra-9450
-- LinkedIn: (Add your LinkedIn link here)
 
 ---
 
