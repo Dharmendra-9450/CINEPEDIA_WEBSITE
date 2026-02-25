@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinepedia — The World's Finest Film Library</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===================================================
+     NAV
+==================================================== -->
+<nav>
+  <div class="logo" onclick="showPage('home')">CINE<span>PEDIA</span></div>
+  <ul>
+    <li><a href="#" id="nav-home"   class="active"  onclick="showPage('home');   return false;">Home</a></li>
+    <li><a href="#" id="nav-movies"                 onclick="showPage('movies'); return false;">Movies</a></li>
+    <li><a href="#" id="nav-about"                  onclick="showPage('about');  return false;">About</a></li>
+  </ul>
+  <div class="nav-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+    </svg>
+    <input type="text" id="search-input" placeholder="Search movies…" oninput="handleSearch(this.value)" />
+  </div>
+</nav>
+
+<!-- ===================================================
+     HOME PAGE
+==================================================== -->
+<div id="page-home" class="page active">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-bg">
+      <div class="film-strip" id="film-strip"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Discover Cinema</div>
+      <h1>The World's<br><em>Finest</em><br>Film Library</h1>
+      <p>Explore thousands of movies across every genre, era, and culture. Your ultimate destination for cinema enthusiasts.</p>
+      <button class="btn-primary"    onclick="showPage('movies')">Browse Movies</button>
+      <button class="btn-secondary"  onclick="showPage('about')">About Us</button>
+    </div>
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-num" id="stat-movies">500K+</div>
+        <div class="stat-label">Movies</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Genres</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4K</div>
+        <div class="stat-label">Quality</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Genres -->
+  <div class="section" style="background:var(--surface);border-top:1px solid var(--border);">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Browse by <span>Genre</span></div>
+        <div class="section-sub">Explore your favourite categories</div>
+      </div>
+    </div>
+    <div class="genres-grid">
+      <div class="genre-pill" onclick="filterByGenre('Action')">
+        <span class="genre-icon">⚡</span><div class="genre-name">Action</div><div class="genre-count">1200+ films</div>
+      </div>
+      <div class="genre-pill" onclick="filterByGenre('Comedy')">
+        <span class="genre-icon">😂</span><div class="genre-name">Comedy</div><div class="genre-count">980+ films</div>
+      </div>
+      <div class="genre-pill" onclick="filterByGenre('Drama')">
+        <span class="genre-icon">🎭</span><div class="genre-name">Drama</div><div class="genre-count">1500+ films</div>
+      </div>
+      <div class="genre-pill" onclick="filterByGenre('Sci-Fi')">
+        <span class="genre-icon">🚀</span><div class="genre-name">Sci-Fi</div><div class="genre-count">640+ films</div>
+      </div>
+      <div class="genre-pill" onclick="filterByGenre('Horror')">
+        <span class="genre-icon">👻</span><div class="genre-name">Horror</div><div class="genre-count">720+ films</div>
+      </div>
+      <div class="genre-pill" onclick="filterByGenre('Romance')">
+        <span class="genre-icon">❤️</span><div class="genre-name">Romance</div><div class="genre-count">890+ films</div>
+      </div>
+      <div class="genre-pill" onclick="filterByGenre('Thriller')">
+        <span class="genre-icon">🔪</span><div class="genre-name">Thriller</div><div class="genre-count">530+ films</div>
+      </div>
+      <div class="genre-pill" onclick="filterByGenre('Animation')">
+        <span class="genre-icon">🎨</span><div class="genre-name">Animation</div><div class="genre-count">410+ films</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trending -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Trending <span>Now</span></div>
+        <div class="section-sub">Most popular this week</div>
+      </div>
+      <button class="view-all" onclick="showPage('movies')">View All →</button>
+    </div>
+    <div class="movies-grid" id="trending-grid">
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+    </div>
+  </div>
+
+  <!-- Collections -->
+  <div class="section" style="background:var(--surface);border-top:1px solid var(--border);">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Curated <span>Collections</span></div>
+        <div class="section-sub">Handpicked for every mood</div>
+      </div>
+    </div>
+    <div class="collections-grid">
+      <div class="collection-card" onclick="filterByGenre('Action')">
+        <div class="collection-bg" style="background:linear-gradient(135deg,#1a0505,#3d0000)">🔥</div>
+        <div class="collection-info">
+          <div class="collection-title">ADRENALINE RUSH</div>
+          <div class="collection-count">Action · Thriller · 48 films</div>
+        </div>
+      </div>
+      <div class="collection-card" onclick="filterByGenre('Sci-Fi')">
+        <div class="collection-bg" style="background:linear-gradient(135deg,#050a1a,#00113d)">🌌</div>
+        <div class="collection-info">
+          <div class="collection-title">BEYOND STARS</div>
+          <div class="collection-count">Sci-Fi · 24 films</div>
+        </div>
+      </div>
+      <div class="collection-card" onclick="filterByGenre('Romance')">
+        <div class="collection-bg" style="background:linear-gradient(135deg,#1a0510,#3d0020)">💫</div>
+        <div class="collection-info">
+          <div class="collection-title">LOVE STORIES</div>
+          <div class="collection-count">Romance · Drama · 32 films</div>
+        </div>
+      </div>
+      <div class="collection-card" onclick="filterByGenre('Animation')">
+        <div class="collection-bg" style="background:linear-gradient(135deg,#0a0a00,#2a2a00)">🎠</div>
+        <div class="collection-info">
+          <div class="collection-title">ANIMATED WORLDS</div>
+          <div class="collection-count">Animation · Family · 20 films</div>
+        </div>
+      </div>
+      <div class="collection-card" onclick="filterByGenre('Horror')">
+        <div class="collection-bg" style="background:linear-gradient(135deg,#050505,#0d0d0d)">🕷️</div>
+        <div class="collection-info">
+          <div class="collection-title">DARK NIGHTS</div>
+          <div class="collection-count">Horror · Mystery · 18 films</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Rated -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Top <span>Rated</span></div>
+        <div class="section-sub">Critically acclaimed masterpieces</div>
+      </div>
+      <button class="view-all" onclick="showPage('movies')">View All →</button>
+    </div>
+    <div class="movies-grid" id="toprated-grid">
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">CINE<span>PEDIA</span></div>
+        <p>The world's most comprehensive movie database. Discover, explore, and celebrate the art of cinema.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
+          <li><a href="#" onclick="showPage('movies');return false;">Movies</a></li>
+          <li><a href="#" onclick="showPage('about');return false;">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Genres</h4>
+        <ul>
+          <li><a href="#" onclick="filterByGenre('Action');return false;">Action</a></li>
+          <li><a href="#" onclick="filterByGenre('Drama');return false;">Drama</a></li>
+          <li><a href="#" onclick="filterByGenre('Comedy');return false;">Comedy</a></li>
+          <li><a href="#" onclick="filterByGenre('Sci-Fi');return false;">Sci-Fi</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Powered By</h4>
+        <ul>
+          <li><a href="https://www.themoviedb.org" target="_blank">TMDB API</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 <strong>CINEPEDIA</strong>. All rights reserved. Movie data by The Movie Database.</div>
+      <div>Made with ❤️ by <strong>Dharmendra</strong></div>
+    </div>
+  </footer>
+</div><!-- /page-home -->
+
+<!-- ===================================================
+     MOVIES PAGE
+==================================================== -->
+<div id="page-movies" class="page">
+  <div class="movies-page-header">
+    <h1>All <span>Movies</span></h1>
+    <p style="color:var(--muted);margin-top:.5rem;font-size:.9rem;">Browse our complete film library</p>
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn"        onclick="setFilter('Action',this)">Action</button>
+      <button class="filter-btn"        onclick="setFilter('Comedy',this)">Comedy</button>
+      <button class="filter-btn"        onclick="setFilter('Drama',this)">Drama</button>
+      <button class="filter-btn"        onclick="setFilter('Sci-Fi',this)">Sci-Fi</button>
+      <button class="filter-btn"        onclick="setFilter('Horror',this)">Horror</button>
+      <button class="filter-btn"        onclick="setFilter('Romance',this)">Romance</button>
+      <button class="filter-btn"        onclick="setFilter('Animation',this)">Animation</button>
+      <button class="filter-btn"        onclick="setFilter('Thriller',this)">Thriller</button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="movies-grid" id="all-movies-grid">
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+      <div class="loading-skeleton"></div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-bottom">
+      <div>© 2025 <strong>CINEPEDIA</strong>. All rights reserved.</div>
+      <div>Made with ❤️ by <strong>Dharmendra</strong></div>
+    </div>
+  </footer>
+</div><!-- /page-movies -->
+
+<!-- ===================================================
+     ABOUT PAGE
+==================================================== -->
+<div id="page-about" class="page">
+  <div class="about-hero">
+    <div class="about-hero-content">
+      <h1>About Cinepedia</h1>
+      <p>Your premier destination for exploring the vast world of cinema — from timeless classics to the latest blockbusters.</p>
+    </div>
+  </div>
+  <div class="about-body">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Our Mission</h2>
+        <p>Cinepedia was born from a passion for cinema and a desire to create the most comprehensive, accessible, and beautifully designed movie database on the web.</p>
+        <p>We believe that great films deserve great presentation. Every detail — from cast information to production notes — is curated with care to help you discover and appreciate the art of filmmaking.</p>
+        <p>Using data from The Movie Database (TMDB), we bring you accurate, up-to-date information on thousands of films across every genre, language, and era.</p>
+      </div>
+      <div class="about-features">
+        <div class="feature-card">
+          <div class="feature-icon">🎬</div>
+          <div class="feature-title">Vast Library</div>
+          <div class="feature-desc">Access hundreds of thousands of movies from around the world.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⭐</div>
+          <div class="feature-title">Real Ratings</div>
+          <div class="feature-desc">Community-driven ratings and reviews you can trust.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <div class="feature-title">Smart Search</div>
+          <div class="feature-desc">Find any film instantly by title, actor, or genre.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎭</div>
+          <div class="feature-title">Rich Details</div>
+          <div class="feature-desc">Full cast, crew, production details, and synopses.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-section">
+      <h2>Powered By</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5rem;">
+        <div class="info-item"><div class="info-label">Data Source</div><div class="info-value">The Movie Database (TMDB)</div></div>
+        <div class="info-item"><div class="info-label">API Version</div><div class="info-value">TMDB API v3</div></div>
+        <div class="info-item"><div class="info-label">Images</div><div class="info-value">TMDB Image CDN</div></div>
+        <div class="info-item"><div class="info-label">Created By</div><div class="info-value" style="color:var(--gold)">Dharmendra</div></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-bottom">
+      <div>© 2025 <strong>CINEPEDIA</strong>. All rights reserved.</div>
+      <div>Made with ❤️ by <strong>Dharmendra</strong></div>
+    </div>
+  </footer>
+</div><!-- /page-about -->
+
+<!-- ===================================================
+     DETAIL PAGE
+==================================================== -->
+<div id="page-detail" class="page">
+  <div class="detail-hero">
+    <div class="detail-backdrop" id="detail-backdrop"></div>
+    <div class="detail-hero-content">
+      <div class="detail-poster">
+        <img id="detail-poster-img" src="" alt="Movie Poster" />
+      </div>
+      <div class="detail-info">
+        <button class="back-btn" onclick="goBack()">← Back</button>
+        <div class="detail-genre-badge" id="detail-genre-badge">Genre</div>
+        <div class="detail-title"   id="detail-title">Movie Title</div>
+        <div class="detail-tagline" id="detail-tagline"></div>
+        <div class="detail-meta-row">
+          <div class="detail-meta-item"><div class="detail-meta-val" id="detail-year">—</div><div class="detail-meta-key">Year</div></div>
+          <div class="detail-meta-item"><div class="detail-meta-val" id="detail-rating">—</div><div class="detail-meta-key">Rating</div></div>
+          <div class="detail-meta-item"><div class="detail-meta-val" id="detail-runtime">—</div><div class="detail-meta-key">Runtime</div></div>
+          <div class="detail-meta-item"><div class="detail-meta-val" id="detail-votes">—</div><div class="detail-meta-key">Votes</div></div>
+        </div>
+        <div class="detail-overview" id="detail-overview">Loading…</div>
+        <div class="detail-actions">
+          <button class="btn-primary"   onclick="showToast('Added to Watchlist! 🎬')">+ Watchlist</button>
+          <button class="btn-secondary" onclick="showToast('Added to Favorites! ❤️')">♥ Favorite</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-body">
+    <div class="detail-section">
+      <div class="detail-section-title">Movie Details</div>
+      <div class="info-grid" id="detail-info-grid"></div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-title">Cast</div>
+      <div class="cast-grid" id="detail-cast-grid"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom">
+      <div>© 2025 <strong>CINEPEDIA</strong>. All rights reserved.</div>
+      <div>Made with ❤️ by <strong>Dharmendra</strong></div>
+    </div>
+  </footer>
+</div><!-- /page-detail -->
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
