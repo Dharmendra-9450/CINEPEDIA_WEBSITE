@@ -2,7 +2,7 @@
 
 CINEPEDIA is a modern and responsive movie information website that allows users to explore movies, view details, and discover trending content in an elegant and user-friendly interface.
 
-🚀 Live Demo: [http://YOUR_PUBLIC_IP ](http://13.218.163.43/) 
+🚀 Live Demo: [http://PUBLIC_IP ](http://13.218.163.43/) 
 
 📂 Repository: https://github.com/Dharmendra-9450/CINEPEDIA_WEBSITE
 
@@ -35,6 +35,7 @@ This project demonstrates strong frontend development skills using HTML, CSS, an
 ## 📂 Project Structure
 
 CINEPEDIA_WEBSITE/
+
 ├── index.html
 
 ├── style.css
@@ -109,13 +110,16 @@ Through this project, I learned:
 
 ---
 
-## 👨‍💻 Author
+## 👥 Team
+This project was developed by:
 
-**Dharmendra Patel**
+Team Name: Garrison Town
 
-- GitHub: https://github.com/Dharmendra-9450
-
----
+Members:
+1. KrishnaKant Gupta(Team Leader)
+2. Devesh Kumar Mishra
+3. Dharmendra Patel
+4. Himanshu Rawat
 
 ## 📄 License
 
